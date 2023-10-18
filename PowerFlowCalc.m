@@ -2,8 +2,8 @@
 % PowerFlow Calcuation Program by MATLAB Ver. R2018a
 
 % Y Bus Calculator
-% ÀÓÀÇÀÇ n°³ÀÇ bus·Î ÀÌ·ç¾îÁø Àü·Â ½Ã½ºÅÛ¿¡¼­ ¼±·Î Á¤º¸ÀÇ µ¥ÀÌÅÍ¸¦ ÅëÇØ ¾îµå¹ÌÅÏ½º ¸ÅÆ®¸¯½º¸¦ ¸¸µå´Â ÄÚµå
-% ÀÔ·Â ¹Þ´Â µ¥ÀÌÅÍÀÇ ¾ç½ÄÀº ´ÙÀ½°ú °°Àº ÇüÅÂ·Î ¸¸µé¾îÁ® ÀÖ¾î¾ß ÇÑ´Ù
+% ìž„ì˜ì˜ nê°œì˜ busë¡œ ì´ë£¨ì–´ì§„ ì „ë ¥ ì‹œìŠ¤í…œì—ì„œ ì„ ë¡œ ì •ë³´ì˜ ë°ì´í„°ë¥¼ í†µí•´ ì–´ë“œë¯¸í„´ìŠ¤ ë§¤íŠ¸ë¦­ìŠ¤ë¥¼ ë§Œë“œëŠ” ì½”ë“œ
+% ìž…ë ¥ ë°›ëŠ” ë°ì´í„°ì˜ ì–‘ì‹ì€ ë‹¤ìŒê³¼ ê°™ì€ í˜•íƒœë¡œ ë§Œë“¤ì–´ì ¸ ìžˆì–´ì•¼ í•œë‹¤
 % 
 % ex)
 % % 3G 9 Bus Power Flow Data                       <- line data format
@@ -21,15 +21,15 @@
  
 load Line.dat
 
-% µ¥ÀÌÅÍ À¯È¿¼º °Ë»ç (¼±·Î Á¤º¸¿¡ ´ëÇÑ Áßº¹ ÀÔ·Â, From, To°¡ Àß¸ø ÀÔ·ÂµÈ °æ¿ì ¹æÁö)
+% ë°ì´í„° ìœ íš¨ì„± ê²€ì‚¬ (ì„ ë¡œ ì •ë³´ì— ëŒ€í•œ ì¤‘ë³µ ìž…ë ¥, From, Toê°€ ìž˜ëª» ìž…ë ¥ëœ ê²½ìš° ë°©ì§€)
 for i=1:size(Line,1)
-    if Line(i,1) == Line(i,2)   % From ¼ýÀÚ¿Í To ¼ýÀÚ°¡ °°°Ô ÀÔ·ÂµÈ °æ¿ì
+    if Line(i,1) == Line(i,2)   % From ìˆ«ìžì™€ To ìˆ«ìžê°€ ê°™ê²Œ ìž…ë ¥ëœ ê²½ìš°
        sprintf('WRONG LINE DATA : FROM NUM CANNOT BE THE SAME WITH TO NUM')
        return
     end
     
     for j=(i+1):size(Line,1)
-        if (Line(i,1)==Line(j,1) && Line(i,2)==Line(j,2)) || (Line(i,1)==Line(j,2) && Line(i,2)==Line(j,1))     % ¼±·Î Á¤º¸°¡ Áßº¹ ÀÔ·ÂµÈ °æ¿ì
+        if (Line(i,1)==Line(j,1) && Line(i,2)==Line(j,2)) || (Line(i,1)==Line(j,2) && Line(i,2)==Line(j,1))     % ì„ ë¡œ ì •ë³´ê°€ ì¤‘ë³µ ìž…ë ¥ëœ ê²½ìš°
             sprintf('WRONG LINE DATA : DUPLICATED LINE DATA CANNOT EXIST')
             return
         end
@@ -55,8 +55,8 @@ end
 G = real(Yb);   B = imag(Yb);     % Conductance G & Susceptance S
 
 % Bus Data Input
-% ÀÓÀÇÀÇ n°³ÀÇ bus·Î ÀÌ·ç¾îÁø Àü·Â ½Ã½ºÅÛ¿¡¼­ °¢ BusÀÇ µ¥ÀÌÅÍ¸¦ ÀÔ·Â¹Þ´Â ÄÚµå
-% ÀÔ·Â ¹Þ´Â µ¥ÀÌÅÍÀÇ ¾ç½ÄÀº ´ÙÀ½°ú °°Àº ÇüÅÂ·Î ¸¸µé¾îÁ® ÀÖ¾î¾ß ÇÑ´Ù
+% ìž„ì˜ì˜ nê°œì˜ busë¡œ ì´ë£¨ì–´ì§„ ì „ë ¥ ì‹œìŠ¤í…œì—ì„œ ê° Busì˜ ë°ì´í„°ë¥¼ ìž…ë ¥ë°›ëŠ” ì½”ë“œ
+% ìž…ë ¥ ë°›ëŠ” ë°ì´í„°ì˜ ì–‘ì‹ì€ ë‹¤ìŒê³¼ ê°™ì€ í˜•íƒœë¡œ ë§Œë“¤ì–´ì ¸ ìžˆì–´ì•¼ í•œë‹¤
 % 
 % ex)
 % % 3G 9 Bus Power Flow Data             <- Bus data format
@@ -79,8 +79,8 @@ G = real(Yb);   B = imag(Yb);     % Conductance G & Susceptance S
 
 load Bus.dat
 
-% µ¥ÀÌÅÍ À¯È¿¼º °Ë»ç (¹ö½º Á¤º¸¿¡ ´ëÇÑ Áßº¹ ÀÔ·Â, Á¤º¸ ´©¶ô ¹æÁö)
-Bus = sortrows(Bus);     % ¹ö½º Á¤º¸ 1¿­ ±âÁØÀ¸·Î ¿À¸§Â÷¼ø Á¤·Ä
+% ë°ì´í„° ìœ íš¨ì„± ê²€ì‚¬ (ë²„ìŠ¤ ì •ë³´ì— ëŒ€í•œ ì¤‘ë³µ ìž…ë ¥, ì •ë³´ ëˆ„ë½ ë°©ì§€)
+Bus = sortrows(Bus);     % ë²„ìŠ¤ ì •ë³´ 1ì—´ ê¸°ì¤€ìœ¼ë¡œ ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬
 for i=1:size(Bus,1)
    if Bus(i,1) ~= i
        sprintf('WRONG BUS DATA EXIST')
@@ -93,11 +93,11 @@ theta = Bus(:,8);   % Phase Angle
 P = zeros(size(Bus,1),1);   % Active Power
 Q = zeros(size(Bus,1),1);   % Reactive Power
 
-% ÁÖ¾îÁø À¯È¿Àü·Â ¹× ¹«È¿Àü·Â °ªÀÇ ¹ö½º ³Ñ¹ö¸¦ ÀúÀåÇÏ±â À§ÇÑ ¹è¿­ Á¤ÀÇ
-% ¸ð¸£´Â À§»ó°¢°ú Àü¾ÐÀÇ Å©±âÀÇ ¹ö½º ³Ñ¹ö¿¡ ´ëÇÑ Á¤º¸µµ ¾Ë ¼ö ÀÖÀ½
-% ex) pa¿¡ ÀúÀåµÈ ¹ö½º -> À¯È¿Àü·Â °ªÀÌ ÁÖ¾îÁü -> ÇØ´ç ¹ö½ºÀÇ À§»ó°¢ÀÌ ¹ÌÁö¼ö
-% ex) qa¿¡ ÀúÀåµÈ ¹ö½º -> ¹«È¿Àü·Â °ªÀÌ ÁÖ¾îÁü -> ÇØ´ç ¹ö½ºÀÇ Àü¾ÐÀÇ Å©±â°¡ ¹ÌÁö¼ö
-pn = 0;     qn = 0;     % pa¿Í qaÀÇ ¿ø¼Ò °³¼ö¸¦ ¼¼±â À§ÇÑ º¯¼ö
+% ì£¼ì–´ì§„ ìœ íš¨ì „ë ¥ ë° ë¬´íš¨ì „ë ¥ ê°’ì˜ ë²„ìŠ¤ ë„˜ë²„ë¥¼ ì €ìž¥í•˜ê¸° ìœ„í•œ ë°°ì—´ ì •ì˜
+% ëª¨ë¥´ëŠ” ìœ„ìƒê°ê³¼ ì „ì••ì˜ í¬ê¸°ì˜ ë²„ìŠ¤ ë„˜ë²„ì— ëŒ€í•œ ì •ë³´ë„ ì•Œ ìˆ˜ ìžˆìŒ
+% ex) paì— ì €ìž¥ëœ ë²„ìŠ¤ -> ìœ íš¨ì „ë ¥ ê°’ì´ ì£¼ì–´ì§ -> í•´ë‹¹ ë²„ìŠ¤ì˜ ìœ„ìƒê°ì´ ë¯¸ì§€ìˆ˜
+% ex) qaì— ì €ìž¥ëœ ë²„ìŠ¤ -> ë¬´íš¨ì „ë ¥ ê°’ì´ ì£¼ì–´ì§ -> í•´ë‹¹ ë²„ìŠ¤ì˜ ì „ì••ì˜ í¬ê¸°ê°€ ë¯¸ì§€ìˆ˜
+pn = 0;     qn = 0;     % paì™€ qaì˜ ì›ì†Œ ê°œìˆ˜ë¥¼ ì„¸ê¸° ìœ„í•œ ë³€ìˆ˜
 
 for i=1:size(Bus,1)
     if Bus(i,2) == 2
@@ -112,13 +112,13 @@ pa = zeros(pn, 1);    qa = zeros(qn, 1);
 pn = 1;     qn = 1;
 
 for i=1:size(Bus,1)
-    if Bus(i,2)==1  % Slack Bus & Reference Bus -> Àü·Â °ø±Þ -> P>0, Q>0
-        P(i) = Bus(i,3);   Q(i) = Bus(i,4);     % P,Q ÁÖ¾îÁöÁö ¾ÊÀ½ - ¾ø¾îµµ »ó°ü X
-    else if Bus(i,2)==2     % PV Bus -> Àü·Â °ø±Þ -> P>0, Q>0
-             P(i) = Bus(i,3);   Q(i) = Bus(i,4);    % Q ÁÖ¾îÁöÁö ¾ÊÀ½ - ¾ø¾îµµ »ó°ü X
+    if Bus(i,2)==1  % Slack Bus & Reference Bus -> ì „ë ¥ ê³µê¸‰ -> P>0, Q>0
+        P(i) = Bus(i,3);   Q(i) = Bus(i,4);     % P,Q ì£¼ì–´ì§€ì§€ ì•ŠìŒ - ì—†ì–´ë„ ìƒê´€ X
+    else if Bus(i,2)==2     % PV Bus -> ì „ë ¥ ê³µê¸‰ -> P>0, Q>0
+             P(i) = Bus(i,3);   Q(i) = Bus(i,4);    % Q ì£¼ì–´ì§€ì§€ ì•ŠìŒ - ì—†ì–´ë„ ìƒê´€ X
              pa(pn) = i;
              pn = pn + 1;
-    else if Bus(i,2)==3     % PQ Bus -> Àü·Â ¼Òºñ -> P<0, Q<0
+    else if Bus(i,2)==3     % PQ Bus -> ì „ë ¥ ì†Œë¹„ -> P<0, Q<0
             P(i) = -Bus(i,5);    Q(i) = -Bus(i,6);
             pa(pn) = i;     qa(qn) = i;
             pn = pn + 1;    qn = qn + 1;
@@ -130,7 +130,7 @@ for i=1:size(Bus,1)
     end
 end
 
-% Initial Condition (¹ÌÁö¼ö x ÃÊ±âÈ­)
+% Initial Condition (ë¯¸ì§€ìˆ˜ x ì´ˆê¸°í™”)
 xp = zeros(length(pa),1);   xq = ones(length(qa),1);
 x = [xp; xq];
 
@@ -251,77 +251,77 @@ for i=1:size(Bus, 1)
     end
 end
 
-% Calculate Power Flow Current
-% I(i,j) -> i bus¿¡¼­ j bus·Î Èå¸£´Â Á¶·ù·®
-I = zeros(size(Bus, 1));
-for i=1:size(Bus, 1)
-    for j=1:size(Bus, 1)
-        I(i, j) = abs(Yb(i, j)) * (v(i) - v(j));
-    end
-end
-
-
 theta_deg = zeros(length(theta), 1);
 for i=1:length(theta)
-   theta_deg(i)=theta(i)/pi*180; % À§»ó°¢ ´ÜÀ§¸¦ ¶óµð¾È¿¡¼­ µµ·Î º¯È¯ 
+   theta_deg(i)=theta(i)/pi*180; % ìœ„ìƒê° ë‹¨ìœ„ë¥¼ ë¼ë””ì•ˆì—ì„œ ë„ë¡œ ë³€í™˜ 
 end
 
 % PU Method
-Sbase = 30;  % ´ÜÀ§ GVA
-Vbase = 345;    % ´ÜÀ§ kV
-Ibase = Sbase*1000/Vbase;   % ´ÜÀ§ kA
+Sbase = 30;  % ë‹¨ìœ„ GVA
+Vbase = 345;    % ë‹¨ìœ„ kV
+Ibase = Sbase*1000/Vbase;   % ë‹¨ìœ„ kA
 
 vreal = Vbase*v;
 Preal = Sbase*P;    Qreal = Sbase*Q;
-Ireal = Ibase*I;
+
+% Calculate Power Flow Current
+% Ireal(i,j) -> i busì—ì„œ j busë¡œ íë¥´ëŠ” ì¡°ë¥˜ëŸ‰
+Ireal = zeros(size(Bus, 1));
+for i=1:size(Bus, 1)
+    for j=1:size(Bus, 1)
+        Ireal(i, j) = abs(Yb(i, j)) * (vreal(i) - vreal(j));
+    end
+end
+
+I = Ireal/Ibase;  % p.u.ê°’ìœ¼ë¡œ ê³„ì‚°ëœ ì¡°ë¥˜ëŸ‰
 
 % Results
-% °¢ ¹ö½ºº° Àü¾Ð(Å©±â, À§»ó°¢)°ú À¯È¿Àü·Â ¹«È¿Àü·Â °ª¿¡ ´ëÇÑ °è»ê °á°ú °ª & ±×·¡ÇÁ Ãâ·Â
-% °¢ ¼±·Îº° Á¶·ù ¾ç¿¡ ´ëÇÑ °è»ê °á°ú °ª Ãâ·Â
-fprintf('Àü¾ÐÀÇ Å©±â(Vm) [p.u.]\n')
+% ê° ë²„ìŠ¤ë³„ ì „ì••(í¬ê¸°, ìœ„ìƒê°)ê³¼ ìœ íš¨ì „ë ¥ ë¬´íš¨ì „ë ¥ ê°’ì— ëŒ€í•œ ê³„ì‚° ê²°ê³¼ ê°’ & ê·¸ëž˜í”„ ì¶œë ¥
+% ê° ì„ ë¡œë³„ ì¡°ë¥˜ ì–‘ì— ëŒ€í•œ ê³„ì‚° ê²°ê³¼ ê°’ ì¶œë ¥
+fprintf('ì „ì••ì˜ í¬ê¸°(Vm) [p.u.]\n')
 fprintf('------------------------------------------\n')
 for i=1:length(v)
    fprintf('Bus %d : %.4f\n', i, v(i)) 
 end
 fprintf('\n')
 
-fprintf('Àü¾ÐÀÇ À§»ó°¢(theta) [rad]\n')
+fprintf('ì „ì••ì˜ ìœ„ìƒê°(theta) [rad]\n')
 fprintf('------------------------------------------\n')
 for i=1:length(theta)
    fprintf('Bus %d : %.4f\n', i, theta(i)) 
 end
 fprintf('\n')
 
-fprintf('Àü¾ÐÀÇ Å©±â(Vm) [kV]\n')
+fprintf('ì „ì••ì˜ í¬ê¸°(Vm) [kV]\n')
 fprintf('------------------------------------------\n')
 for i=1:length(vreal)
    fprintf('Bus %d : %.2f\n', i, vreal(i)) 
 end
 fprintf('\n')
 
-fprintf('À¯È¿Àü·Â(P) [GW]\n')
+fprintf('ìœ íš¨ì „ë ¥(P) [GW]\n')
 fprintf('------------------------------------------\n')
 for i=1:length(Preal)
-    if Preal(i) > 0     % Àü·Â °ø±Þ
-        fprintf('Bus %d : %.1f (À¯È¿Àü·Â %.1f [GW] °ø±Þ)\n', i, Preal(i), abs(Preal(i))) 
-    else    % Preal(i) <= 0     % Àü·Â ¼Òºñ
-        fprintf('Bus %d : %.1f (À¯È¿Àü·Â %.1f [GW] ¼Òºñ)\n', i, Preal(i), abs(Preal(i)))
+    if Preal(i) > 0     % ì „ë ¥ ê³µê¸‰
+        fprintf('Bus %d : %.1f (ìœ íš¨ì „ë ¥ %.1f [GW] ê³µê¸‰)\n', i, Preal(i), abs(Preal(i))) 
+    else    % Preal(i) <= 0     % ì „ë ¥ ì†Œë¹„
+        fprintf('Bus %d : %.1f (ìœ íš¨ì „ë ¥ %.1f [GW] ì†Œë¹„)\n', i, Preal(i), abs(Preal(i)))
     end
 end
 fprintf('\n')
 
-fprintf('¹«È¿Àü·Â(Q) [GVar]\n')
+fprintf('ë¬´íš¨ì „ë ¥(Q) [GVar]\n')
 fprintf('------------------------------------------\n')
 for i=1:length(Qreal)
-    if Qreal(i) > 0     % Àü·Â °ø±Þ
-        fprintf('Bus %d : %.1f (¹«È¿Àü·Â %.1f [GVar] °ø±Þ)\n', i, Qreal(i), abs(Qreal(i)))
-    else    % Qreal(i) <= 0     % Àü·Â ¼Òºñ
-        fprintf('Bus %d : %.1f (¹«È¿Àü·Â %.1f [GVar] ¼Òºñ)\n', i, Qreal(i), abs(Qreal(i)))
+    if Qreal(i) > 0     % ì „ë ¥ ê³µê¸‰
+        fprintf('Bus %d : %.1f (ë¬´íš¨ì „ë ¥ %.1f [GVar] ê³µê¸‰)\n', i, Qreal(i), abs(Qreal(i)))
+    else    % Qreal(i) <= 0     % ì „ë ¥ ì†Œë¹„
+        fprintf('Bus %d : %.1f (ë¬´íš¨ì „ë ¥ %.1f [GVar] ì†Œë¹„)\n', i, Qreal(i), abs(Qreal(i)))
     end
 end
 fprintf('\n')
 
-fprintf('°¢ ¸ð¼±¿¡¼­ Á¶·ù·®(I(i, j) From i To j) [p.u.]\n')
+fprintf('ê° ëª¨ì„ ì—ì„œ ì¡°ë¥˜ëŸ‰(I(i, j) From i To j) [p.u.]\n')
 fprintf('------------------------------------------\n')
 for i=1:size(I, 1)
     for j=1:size(I, 2)
@@ -331,7 +331,7 @@ for i=1:size(I, 1)
 end
 fprintf('\n')
 
-fprintf('°¢ ¸ð¼±¿¡¼­ Á¶·ù·®(I(i, j) From i To j) [kA]\n')
+fprintf('ê° ëª¨ì„ ì—ì„œ ì¡°ë¥˜ëŸ‰(I(i, j) From i To j) [kA]\n')
 fprintf('------------------------------------------\n')
 for i=1:size(I, 1)
     for j=1:size(I, 2)
@@ -341,8 +341,8 @@ for i=1:size(I, 1)
 end
 fprintf('\n')
 
-% Goal of Voltage Control (Àü¾ÐÁ¶Á¤¸ñÇ¥) [p.u.]
-% ±âÁØÀü¾Ð 345kV´Â Àü¾ÐÁ¶Á¤¸ñÇ¥¸¦ 336kV ~ 360kV·Î ÇÑ´Ù by Àü·Â°èÅë ½Å·Úµµ ¹× Àü·ÂÇ°Áú À¯Áö±âÁØ
+% Goal of Voltage Control (ì „ì••ì¡°ì •ëª©í‘œ) [p.u.]
+% ê¸°ì¤€ì „ì•• 345kVëŠ” ì „ì••ì¡°ì •ëª©í‘œë¥¼ 336kV ~ 360kVë¡œ í•œë‹¤ by ì „ë ¥ê³„í†µ ì‹ ë¢°ë„ ë° ì „ë ¥í’ˆì§ˆ ìœ ì§€ê¸°ì¤€
 % 336kV (0.9739 p.u.) / 360kV (1.0435 p.u.) 
 yline = ones(size(Bus, 1), 1);
 yline1 = (1 - (Vbase-336)/Vbase) * yline;
@@ -356,7 +356,7 @@ plot(Bus(:, 1), yline1, '--');
 plot(Bus(:, 1), yline2, '--');
 title('Votage Magnitue(Vm) & Phase Angle(Theta)');
 ylabel('Voltage[p.u.]');
-xlabel('°æ³²(1)  °­¿ø(2)  ¼­¿ï(3)  ÀüºÏ(4)  °æºÏ(5)  Àü³²(6)  ÃæºÏ(7)  °æ±â(8)  Ãæ³²(9)');
+xlabel('ê²½ë‚¨(1)  ê°•ì›(2)  ì„œìš¸(3)  ì „ë¶(4)  ê²½ë¶(5)  ì „ë‚¨(6)  ì¶©ë¶(7)  ê²½ê¸°(8)  ì¶©ë‚¨(9)');
 grid on;
 
 yyaxis right
@@ -368,6 +368,6 @@ PQ = [Preal Qreal];
 bar(Bus(:, 1), PQ);
 title('Active Power(P) & Reactive Power(Q)')
 ylabel('P/Q[GW/GVar](+:gen,-:consum)');
-xlabel('°æ³²(1)  °­¿ø(2)  ¼­¿ï(3)  ÀüºÏ(4)  °æºÏ(5)  Àü³²(6)  ÃæºÏ(7)  °æ±â(8)  Ãæ³²(9)');
+xlabel('ê²½ë‚¨(1)  ê°•ì›(2)  ì„œìš¸(3)  ì „ë¶(4)  ê²½ë¶(5)  ì „ë‚¨(6)  ì¶©ë¶(7)  ê²½ê¸°(8)  ì¶©ë‚¨(9)');
 legend('Active Power', 'Reactive Power');
 grid on;
